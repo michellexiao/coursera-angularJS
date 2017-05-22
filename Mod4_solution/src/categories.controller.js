@@ -8,6 +8,7 @@ CategoriesController.$inject = ['categories'];
 function CategoriesController(categories) {
   var list = this;
   list.categories = categories;
+  console.log("Data received: ",categories);
 }
 
 // CategoriesController.$inject = ['MenuDataService'];
