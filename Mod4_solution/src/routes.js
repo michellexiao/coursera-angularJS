@@ -25,17 +25,22 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     templateUrl: 'src/templates/main-categories.template.html',
     controller: 'CategoriesController as cctrl',
     resolve: {
-      // categories: ['MenuDataService', function (MenuDataService) {
-      //   return MenuDataService.getAllCategories();
-      // }]
+      categories: ['MenuDataService', function (MenuDataService) {
+        return MenuDataService.getAllCategories();
+      }]
     }
   })
 
-  // .state('mainList.itemDetail', {
-  //   url: '/item-detail/{itemId}',
-  //   templateUrl: 'src/shoppinglist/templates/item-detail.template.html',
-  //   controller: "ItemDetailController as itemDetail"
-  // });
+  .state('items', {
+    url: '/categories/items/{itemCategory}',
+    templateUrl: 'src/templates/main-menuitem.template.html',
+    controller: "ItemsController as itemctrl",
+    resolve: {
+      items: ['MenuDataService','$stateParams', function (MenuDataService,$stateParams) {
+        return MenuDataService.getItemsForCategory($stateParams.itemCategory);
+      }]
+    }
+  });
 
 }
 
